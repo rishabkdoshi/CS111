@@ -8,35 +8,35 @@ Example
  #include <sys/types.h>
 
  int main(void) {
-     int fd[2], nbytes;
-     pid_t childpid;
-     char string[] = "Hello, world!\n";
-     char readbuffer[80];
+  int fd[2], nbytes;
+  pid_t childpid;
+  char string[] = "Hello, world!\n";
+  char readbuffer[80];
 
-     pipe(fd);
 
-     if ((childpid = fork()) == -1) {
-         perror("fork");
-         exit(1);
-     }
+  printf("Before pipe, FD values fd0 -> %d, fd1 -> %d\n", fd[0], fd[1]);
+  pipe(fd);
 
-     if (childpid == 0) {
-         //Child process closes up input side of pipe
-         close(fd[0]);
+  printf("After pipe, FD values fd0 -> %d, fd1 -> %d\n", fd[0], fd[1]);
+  if ((childpid = fork()) == -1) {
+    perror("fork");
+    exit(1);
+  }
 
-         //Send "string" through the output side of pipe 
-         write(fd[1], string, (strlen(string) + 1));
-         exit(0);
-     } else {
-         //Parent process closes up output side of pipe
-         close(fd[1]);
+  if (childpid == 0) {
+    //Child process closes up input side of pipe
+    close(fd[0]);
 
-         //Read in a string from the pipe                    
-         nbytes = read(fd[0], readbuffer, sizeof(readbuffer));
-         printf("Received string: %s", readbuffer);
-     }
+    //Send "string" through the output side of pipe
+    write(fd[1], string, (strlen(string) + 1));
+    exit(0);
+  } else {
+    //Parent process closes up output side of pipe
+    close(fd[1]);
 
-     return (0);
- }
+    //Read in a string from the pipe
+    nbytes = read(fd[0], readbuffer, sizeof(readbuffer));
+    printf("Received string: %s", readbuffer);
+  }
 ```
 
