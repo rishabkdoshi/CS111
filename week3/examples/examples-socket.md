@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
 ### client.c
 
-```
+```c
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
