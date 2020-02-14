@@ -46,8 +46,11 @@ install steps:
 https://github.com/gperftools/gperftools/blob/master/INSTALL#L375
 
 ```
+mkdir lib - this is your lib path
 git clone https://github.com/gperftools/gperftools
-./configure --prefix=PATH
+cd gperftools
+./autogen.sh
+./configure --prefix=<lib_path>
 make
 make install
 ```
