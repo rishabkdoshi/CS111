@@ -45,10 +45,12 @@ Doesn't work for multithreaded environment, lets install googles performance too
 install steps:
 https://github.com/gperftools/gperftools/blob/master/INSTALL#L375
 
+**To be updated**
 ```
 mkdir lib - this is your lib path
 git clone https://github.com/gperftools/gperftools
 cd gperftools
+autoconf
 ./autogen.sh
 ./configure --prefix=<lib_path>
 make
