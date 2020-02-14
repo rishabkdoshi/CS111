@@ -60,5 +60,6 @@ make install
 pprof example:
 ```
 gcc -Wall -lprofiler test_gprof.c test_gprof_new.c -o test_gprof_lprofiler
-pprof --text ./test_gprof_lprofiler gprof.prof
+env CPUPROFILE=profileInfo.prof ./test_gprof_lprofiler
+pprof --text ./test_gprof_lprofiler profileInfo.prof
 ```
